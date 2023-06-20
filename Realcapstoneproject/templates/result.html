@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Capstone - 번호판 분석 결과</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .result-message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 30px;
+            position: fixed;
+            top: 70%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+        }
+
+        .result-text {
+            font-size: 18px;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        /* Rectangle 26 */
+        .box-26 {
+            box-sizing: border-box;
+            position: absolute;
+            width: 1141px;
+            height: 603px;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(247, 244, 244, 0.7);
+            border: 1px solid #000000;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Rectangle 24 */
+        .box-24 {
+            position: absolute;
+            width: 691px;
+            height: 365px;
+            left: 50%;
+            top: 65%;
+            transform: translate(-50%, -50%);
+            background: #D9D9D9;
+        }
+
+        /* car icon */
+        .car {
+            position: absolute;
+            width: 200px;
+            height: 231.23px;
+            left: 50%;
+            top: 20%;
+            transform: translate(-50%, -50%);
+            background: url("/static/car.png");
+            opacity: 0.4;
+            filter: blur(2px);
+            z-index: 200;
+            background-size: contain;
+            background-position: center;
+        }
+
+        /* license-plate icon */
+        .license-plate {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            left: 50%;
+            top: 30%;
+            transform: translate(-50%, -50%);
+            background: url("/static/license-plate.png");
+            opacity: 0.4;
+            filter: blur(2px);
+            z-index: 600;
+            background-size: contain;
+            background-position: center;
+        }
+
+        /* 차량 번호판 인식 */
+        .license-recognition {
+            position: absolute;
+            width: 250px;
+            height: 57px;
+            left: 50%;
+            top: 20%;
+            transform: translate(-50%, -20%);
+            font-family: 'S-Core Dream';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 32px;
+            line-height: 57px;
+            display: flex;
+            align-items: flex-end;
+            color: #000000;
+            text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        }
+
+        /* 김경태, 구희찬, 이은송 */
+        .contributors {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* 이미지 표시 스타일 */
+        .result-image {
+            position: absolute;
+            width: 500px;
+            height: 300px;
+            left: 50%;
+            top: 55%;
+            transform: translate(-50%, -50%);
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+              .result-text {
+            font-size: 18px;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+    <script>
+    // 이미지 업데이트 함수
+    function updateImage() {
+        var imageElement = document.getElementById('result-image');
+        imageElement.src = '/file_upload/result.jpg'; // 이미지 파일 경로
+    }
+
+    // 페이지 로드 시 이미지 업데이트 함수 호출
+    window.onload = function() {
+        updateImage();
+
+        // 일정 시간마다 이미지 업데이트
+        setInterval(function() {
+            updateImage();
+        }, 5000); // 5초마다 업데이트 (밀리초 단위)
+
+        // 결과 텍스트 업데이트 함수
+        function updateResultText() {
+            var resultTextElement = document.getElementById('result-text');
+            var result_text = "{{ result_text }}"; // result_text 변수의 값을 출력합니다.
+            resultTextElement.innerText = result_text;
+        }
+
+        // 페이지 로드 시 결과 텍스트 업데이트 함수 호출
+        updateResultText();
+    }
+</script>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="box-26">
+            <div class="box-24"></div>
+            <div class="camera"></div>
+            <div class="car"></div>
+            <div class="license-plate"></div>
+            <p class="license-recognition">차량 번호판 인식</p>
+        </div>
+        <p class="result-message">번호판 분석 결과입니다!</p>
+        <p class="result-text" id="result-text"></p>
+        <div class="contributors">김경태, 구희찬, 이은송</div>
+    </div>
+    <div class="result-image" style="background-image: url('/static/result.jpg');"></div>
+</body>
+</html>
+<!--    </style>-->
+<!--    <script>-->
+<!--        // 이미지 업데이트 함수-->
+<!--        function updateImage() {-->
+<!--            var imageElement = document.getElementById('result-image');-->
+<!--            imageElement.src = '/file_upload/result.jpg'; // 이미지 파일 경로-->
+<!--        }-->
+
+<!--        // 페이지 로드 시 이미지 업데이트 함수 호출-->
+<!--        window.onload = function() {-->
+<!--            updateImage();-->
+
+<!--            // 일정 시간마다 이미지 업데이트-->
+<!--            setInterval(function() {-->
+<!--                updateImage();-->
+<!--            }, 5000); // 5초마다 업데이트 (밀리초 단위)-->
+<!--        };-->
+<!--        // 결과 텍스트 업데이트 함수-->
+<!--        function updateResultText() {-->
+<!--            var resultTextElement = document.getElementById('result-text');-->
+<!--            var result_text = "Here is the result_text"; // Replace with your desired value-->
+<!--            resultTextElement.innerText = result_text;-->
+<!--        }-->
+
+<!--        // 페이지 로드 시 결과 텍스트 업데이트 함수 호출-->
+<!--        window.onload = function() {-->
+<!--            updateResultText();-->
+<!--        };-->
+<!--    </script>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="loading-container">-->
+<!--        <div class="box-26">-->
+<!--            <div class="box-24"></div>-->
+<!--            <div class="camera"></div>-->
+<!--            <div class="car"></div>-->
+<!--            <div class="license-plate"></div>-->
+<!--            <p class="license-recognition">차량 번호판 인식</p>-->
+<!--        </div>-->
+<!--        <p class="result-message">번호판 분석 결과입니다!</p>-->
+<!--        <p class="result-text" id="result-text"></p>-->
+<!--        <div class="contributors">김경태, 구희찬, 이은송</div>-->
+<!--    </div>-->
+<!--    <div class="result-image" style="background-image: url('/static/result.jpg');"></div>-->
+<!--</body>-->
+<!--</html>-->
